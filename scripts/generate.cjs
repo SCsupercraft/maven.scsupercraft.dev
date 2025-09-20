@@ -84,11 +84,6 @@ async function forFolder(filePath) {
 	const dirs = [];
 	const artifacts = [];
 
-	const javadocRel = path.posix.relative(
-		artifactFolder,
-		path.resolve(filePath, 'javadoc')
-	);
-
 	for (let i in files) {
 		const file = files[i];
 		if (ignored.includes(file)) continue;
@@ -150,9 +145,15 @@ async function forFolder(filePath) {
 		markdown += `\n- 📄 [${artifact}](/${path.posix.relative(
 			artifactFolder,
 			fullPath
-		)}) - ${sizeKB} KB, modified ${modified}${
-			isJavadoc ? `, [view javadoc](/${javadocRel}/index.html)` : ''
-		}`;
+		)}) - ${sizeKB} KB, modified ${modified}`;
+	}
+
+	if (hasJavadoc) {
+		const javadocRel = path.posix.relative(
+			artifactFolder,
+			path.resolve(filePath, 'javadoc')
+		);
+		markdown += `\n- 📖 [View Javadoc](/${javadocRel}/index.html)`;
 	}
 
 	markdown +=

@@ -1,7 +1,7 @@
-# scsupercraft-maven
-My maven repo
+# SCsupercraft's Maven Repository
 
-Groovy DSL
+## Groovy DSL
+
 ```groovy
 repositories {
     maven {
@@ -9,7 +9,8 @@ repositories {
     }
 }
 ```
-Kotlin DSL
+
+## Kotlin DSL
 
 ```kotlin
 repositories {
@@ -18,3 +19,7 @@ repositories {
     }
 }
 ```
+
+## Artifacts
+
+You can find a list of artifacts [here](/artifacts)

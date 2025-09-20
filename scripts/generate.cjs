@@ -217,9 +217,6 @@ async function forFolder(filePath) {
 			markdown += `\n- 📦 <a href="${links.downloads.trim()}" target="_blank" rel="noopener noreferrer">View Downloads</a>`;
 	}
 
-	markdown +=
-		'\n\n## Links:\n- [Github](https://github.com/SCsupercraft/maven.scsupercraft.dev)\n- [Main Site](https://www.scsupercraft.dev)';
-
 	await fs.writeFile(path.resolve(filePath, 'index.md'), markdown, 'utf-8');
 	console.log(
 		'Created index for ' +

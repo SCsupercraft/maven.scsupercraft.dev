@@ -14,6 +14,7 @@ const ignored = [
 	'404.md',
 	'index.md',
 	'scripts',
+	'changelog',
 	'package.json',
 	'package-lock.json',
 	'node_modules',
@@ -193,6 +194,11 @@ async function forFolder(filePath) {
 		);
 		markdown += `\n- 📖 [View Javadoc](/${javadocRel}/index.html)`;
 	}
+	if (files.includes('changelog'))
+		markdown += `\n- 🧾 [View Changelog](${await fs.readFile(
+			path.resolve(filePath, 'changelog'),
+			'utf-8'
+		)})`;
 
 	markdown +=
 		'\n\n## Links:\n- [Github](https://github.com/SCsupercraft/scsupercraft-maven)';

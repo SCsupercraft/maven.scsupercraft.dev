@@ -5,6 +5,7 @@ url: 'https://maven.scsupercraft.dev'
 theme: null
 exclude:
     - scripts
+    - README.md
 
 minima:
     nav_pages:

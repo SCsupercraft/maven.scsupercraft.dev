@@ -1,7 +1,15 @@
 const path = require('node:path');
 const fs = require('node:fs/promises');
 
-const artifactFolder = path.resolve('./artifacts');
+const artifactFolder = path.resolve('./');
+const ignored = [
+	'.git',
+	'_config.yml',
+	'CNAME',
+	'README.md',
+	'index.md',
+	'scripts',
+];
 
 /**
  * Determines whether a given path is a file or a folder.
@@ -28,6 +36,8 @@ async function forFolder(/** @type {string} */ filePath) {
 
 	for (let i in files) {
 		const file = files[i];
+		if (ignored.includes(file)) continue;
+
 		const pathType = await getPathType(path.resolve(filePath, file));
 		switch (pathType) {
 			case 'directory': {
@@ -35,7 +45,7 @@ async function forFolder(/** @type {string} */ filePath) {
 				break;
 			}
 			case 'file': {
-				if (file != 'index.md') artifacts.push(file);
+				artifacts.push(file);
 				break;
 			}
 		}
@@ -45,7 +55,7 @@ async function forFolder(/** @type {string} */ filePath) {
 	const breadcrumb =
 		displayPath.length == 0
 			? 'root'
-			: '[root](/artifacts) » ' +
+			: '[root](/) » ' +
 			  displayPath
 					.replaceAll('/', '»')
 					.replaceAll('\\', '»')
@@ -55,16 +65,14 @@ async function forFolder(/** @type {string} */ filePath) {
 						return (
 							p +
 							(p.length == 0 ? '' : ' » ') +
-							(a.length - 1 == i
-								? c
-								: `[${c}](/artifacts${curr})`)
+							(a.length - 1 == i ? c : `[${c}](${curr})`)
 						);
 					}, '');
 
 	let markdown = `# ${breadcrumb}\n`;
 
 	dirs.forEach((dir) => {
-		markdown += `\n\n📁 [${dir}](/artifacts/${path
+		markdown += `\n\n📁 [${dir}](/${path
 			.relative(artifactFolder, path.resolve(filePath, dir))
 			.replaceAll('\\', '/')})`;
 		forFolder(path.resolve(filePath, dir));
@@ -73,7 +81,7 @@ async function forFolder(/** @type {string} */ filePath) {
 	if (dirs.length > 0 && artifacts.length > 0) markdown += '\n';
 
 	artifacts.forEach((artifact) => {
-		markdown += `\n\n📄 [${artifact}](/artifacts/${path
+		markdown += `\n\n📄 [${artifact}](/${path
 			.relative(artifactFolder, path.resolve(filePath, artifact))
 			.replaceAll('\\', '/')})`;
 	});

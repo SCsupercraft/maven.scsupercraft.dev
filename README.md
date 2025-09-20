@@ -22,4 +22,4 @@ repositories {
 
 ## Artifacts
 
-You can find a list of artifacts [here](/artifacts)
+You can find a list of artifacts [here](https://maven.scsupercraft.dev)

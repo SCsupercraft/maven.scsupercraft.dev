@@ -4,11 +4,14 @@ const fs = require('node:fs/promises');
 const artifactFolder = path.resolve('./');
 const ignored = [
 	'.git',
+	'.github',
 	'_config.yml',
 	'CNAME',
 	'README.md',
 	'index.md',
 	'scripts',
+	'package.json',
+	'package-lock.json',
 ];
 
 /**

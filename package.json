@@ -1,0 +1,18 @@
+{
+	"name": "scsupercraft-maven",
+	"version": "1.0.0",
+	"description": "SCsupercraft's Maven Repository",
+	"main": "scripts/generate.cjs",
+	"scripts": {},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/SCsupercraft/scsupercraft-maven.git"
+	},
+	"keywords": [],
+	"author": "SCsupercraft",
+	"type": "commonjs",
+	"bugs": {
+		"url": "https://github.com/SCsupercraft/scsupercraft-maven/issues"
+	},
+	"homepage": "https://maven.scsupercraft.dev"
+}

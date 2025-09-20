@@ -199,11 +199,13 @@ async function forFolder(filePath) {
 		);
 		markdown += `\n- 📖 <a href="/${javadocRel}/index.html" target="_blank" rel="noopener noreferrer">View Javadoc</a>`;
 	}
-	if (files.includes('changelog'))
-		markdown += `\n- 🧾 <a href="${await fs.readFile(
+	if (files.includes('changelog')) {
+		const changelogUrl = await fs.readFile(
 			path.resolve(filePath, 'changelog'),
 			'utf-8'
-		)}" target="_blank" rel="noopener noreferrer">View Changelog</a>`;
+		);
+		markdown += `\n- 🧾 <a href="${changelogUrl.trim()}" target="_blank" rel="noopener noreferrer">View Changelog</a>`;
+	}
 
 	markdown +=
 		'\n\n## Links:\n- [Github](https://github.com/SCsupercraft/maven.scsupercraft.dev)\n- [Main Site](https://www.scsupercraft.dev)';

@@ -19,6 +19,7 @@ const ignored = [
 	'package-lock.json',
 	'node_modules',
 ];
+const packages = [];
 
 /**
  * Determines whether a given path is a file or a folder.
@@ -119,6 +120,9 @@ async function forFolder(filePath) {
 		);
 		return;
 	}
+	if (displayPath.length != 0) {
+		packages.push(displayPath);
+	}
 
 	const dirs = [];
 	const artifacts = [];
@@ -211,3 +215,9 @@ async function forFolder(filePath) {
 }
 
 forFolder(artifactFolder);
+await fs.writeFile(
+	path.resolve(artifactFolder, 'search-index.json'),
+	JSON.stringify(packages),
+	'utf-8'
+);
+console.log('Created search index with ' + packages.length + ' packages');

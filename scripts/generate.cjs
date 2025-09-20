@@ -84,7 +84,7 @@ async function forFolder(filePath) {
 						);
 					}, '');
 
-	let markdown = `# ${breadcrumb}\n`;
+	let markdown = `---\nlayout: default\n---\n\n# ${breadcrumb}\n`;
 
 	for (let dir of dirs) {
 		const fullPath = path.resolve(filePath, dir);

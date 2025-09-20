@@ -37,7 +37,7 @@ async function getPathType(path) {
  */
 async function forFolder(filePath) {
 	const displayPath = path.relative(artifactFolder, filePath);
-	const files = await fs.readdir(filePath);
+	const files = (await fs.readdir(filePath)).sort();
 	const dirs = [];
 	const artifacts = [];
 

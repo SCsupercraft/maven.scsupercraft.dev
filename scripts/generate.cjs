@@ -214,10 +214,12 @@ async function forFolder(filePath) {
 	);
 }
 
-forFolder(artifactFolder);
-await fs.writeFile(
-	path.resolve(artifactFolder, 'search-index.json'),
-	JSON.stringify(packages),
-	'utf-8'
-);
-console.log('Created search index with ' + packages.length + ' packages');
+(async () => {
+	await forFolder(artifactFolder);
+	await fs.writeFile(
+		path.resolve(artifactFolder, 'search-index.json'),
+		JSON.stringify(packages),
+		'utf-8'
+	);
+	console.log('Created search index with ' + packages.length + ' packages');
+})();

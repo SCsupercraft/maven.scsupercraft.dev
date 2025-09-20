@@ -48,6 +48,7 @@ async function extractJavadocJar(jarPath) {
 	try {
 		await fs.mkdir(targetDir, { recursive: true });
 		await unzip(jarPath, { dir: targetDir });
+		await addIcon(targetDir);
 		console.log(
 			`Extracted Javadoc to root/${path.posix.relative(
 				artifactFolder,
@@ -64,6 +65,42 @@ async function extractJavadocJar(jarPath) {
 			err
 		);
 		return false;
+	}
+}
+
+/**
+ * Adds favicon link to all HTML files in a directory.
+ * @param {string} javadocDir - Path to the unpacked javadoc folder.
+ */
+async function addIcon(javadocDir) {
+	const files = await fs.readdir(javadocDir, { withFileTypes: true });
+
+	for (const file of files) {
+		const fullPath = path.join(javadocDir, file.name);
+		const displayPath = path.posix.relative(artifactFolder, fullPath);
+
+		if (file.isDirectory()) {
+			await addIcon(fullPath); // recurse into subfolders
+		} else if (file.isFile() && file.name.endsWith('.html')) {
+			try {
+				let html = await fs.readFile(fullPath, 'utf-8');
+
+				// Inject favicon link into <head>
+				html = html.replace(
+					/<head[^>]*>/i,
+					(match) =>
+						`${match}\n<link rel="icon" type="image/png" href="https://www.scsupercraft.dev/logo.png">`
+				);
+
+				await fs.writeFile(fullPath, html, 'utf-8');
+				console.log(`Injected favicon into root/${displayPath}`);
+			} catch (err) {
+				console.error(
+					`Failed to inject favicon into root/${displayPath}`,
+					err
+				);
+			}
+		}
 	}
 }
 

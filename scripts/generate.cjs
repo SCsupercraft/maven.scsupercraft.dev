@@ -107,7 +107,11 @@ async function forFolder(filePath) {
 		'\n\n## Links:\n- [Github](https://github.com/SCsupercraft/scsupercraft-maven)';
 
 	await fs.writeFile(path.resolve(filePath, 'index.md'), markdown, 'utf-8');
-	console.log('Created index for ' + displayPath);
+	console.log(
+		'Created index for ' + displayPath.length == 0
+			? 'root'
+			: 'root/' + displayPath
+	);
 }
 
 forFolder(artifactFolder);

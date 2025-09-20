@@ -6,6 +6,7 @@ const artifactFolder = path.resolve('./');
 const ignored = [
 	'.git',
 	'.github',
+	'.gitignore',
 	'_config.yml',
 	'_layouts',
 	'CNAME',
@@ -41,15 +42,26 @@ async function getPathType(path) {
  */
 async function extractJavadocJar(jarPath) {
 	if (!jarPath.endsWith('-javadoc.jar')) return false;
-
 	const targetDir = path.join(path.dirname(jarPath), 'javadoc');
+
 	try {
 		await fs.mkdir(targetDir, { recursive: true });
 		await unzip(jarPath, { dir: targetDir });
-		console.log(`Extracted Javadoc to ${targetDir}`);
+		console.log(
+			`Extracted Javadoc to root/${path.posix.relative(
+				artifactFolder,
+				targetDir
+			)}`
+		);
 		return true;
 	} catch (err) {
-		console.error(`Failed to extract Javadoc from ${jarPath}`, err);
+		console.error(
+			`Failed to extract Javadoc from root/${path.posix.relative(
+				artifactFolder,
+				jarPath
+			)}`,
+			err
+		);
 		return false;
 	}
 }

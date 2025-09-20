@@ -1,4 +1,4 @@
 # dev
 
 
-- 📁 [scsupercraft](/artifacts/dev/scsupercraft)
+📁 [scsupercraft](/artifacts/dev/scsupercraft)

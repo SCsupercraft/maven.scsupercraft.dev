@@ -85,11 +85,16 @@ async function forFolder(filePath) {
 		forFolder(path.resolve(filePath, dir));
 	});
 
-	artifacts.forEach((artifact) => {
+	for (let index in artifacts) {
+		const artifact = artifacts[index];
+		const stats = await fs.stat(path.resolve(filePath, artifact));
+		const sizeKB = (stats.size / 1024).toFixed(1);
+		const modified = new Date(stats.mtime).toISOString().split('T')[0];
+
 		markdown += `\n- 📄 [${artifact}](/${path
 			.relative(artifactFolder, path.resolve(filePath, artifact))
-			.replaceAll('\\', '/')})`;
-	});
+			.replaceAll('\\', '/')}) - ${sizeKB} KB, modified ${modified}`;
+	}
 
 	await fs.writeFile(path.resolve(filePath, 'index.md'), markdown, 'utf-8');
 	console.log('Created index for ' + filePath);

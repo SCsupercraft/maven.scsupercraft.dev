@@ -36,9 +36,15 @@ async function getPathType(path) {
  * @param {string} filePath - The path of the directory.
  */
 async function forFolder(filePath) {
-	const displayPath = path.relative(artifactFolder, filePath);
+	const displayPath = path.posix.relative(artifactFolder, filePath);
 	const files = (await fs.readdir(filePath)).sort();
-	if (files.length == 0) return;
+	if (files.length == 0) {
+		console.log(
+			'Skipped empty directory: ' +
+				(displayPath.length == 0 ? 'root' : 'root/' + displayPath)
+		);
+		return;
+	}
 
 	const dirs = [];
 	const artifacts = [];
@@ -67,7 +73,6 @@ async function forFolder(filePath) {
 			: '[root](/) » ' +
 			  displayPath
 					.replaceAll('/', '»')
-					.replaceAll('\\', '»')
 					.split('»')
 					.reduce((p, c, i, a) => {
 						curr += '/' + c;
@@ -78,31 +83,31 @@ async function forFolder(filePath) {
 						);
 					}, '');
 
-	let markdown = `# ${breadcrumb}\n`;
+	let markdown = `---\ntitle: SCsupercraft's Maven\n---\n\n# ${breadcrumb}\n`;
 
-	for (let index in dirs) {
-		const dir = dirs[index];
+	for (let dir of dirs) {
 		const fullPath = path.resolve(filePath, dir);
 		const stats = await fs.stat(fullPath);
 		const modified = new Date(stats.mtime).toISOString().split('T')[0];
 
-		markdown += `\n- 📁 [${dir}](/${path
-			.relative(artifactFolder, fullPath)
-			.replaceAll('\\', '/')}) - modified ${modified}`;
+		markdown += `\n- 📁 [${dir}](/${path.posix.relative(
+			artifactFolder,
+			fullPath
+		)}) - modified ${modified}`;
 
 		await forFolder(fullPath);
 	}
 
-	for (let index in artifacts) {
-		const artifact = artifacts[index];
+	for (let artifact of artifacts) {
 		const fullPath = path.resolve(filePath, artifact);
 		const stats = await fs.stat(fullPath);
 		const sizeKB = (stats.size / 1024).toFixed(1);
 		const modified = new Date(stats.mtime).toISOString().split('T')[0];
 
-		markdown += `\n- 📄 [${artifact}](/${path
-			.relative(artifactFolder, fullPath)
-			.replaceAll('\\', '/')}) - ${sizeKB} KB, modified ${modified}`;
+		markdown += `\n- 📄 [${artifact}](/${path.posix.relative(
+			artifactFolder,
+			fullPath
+		)}) - ${sizeKB} KB, modified ${modified}`;
 	}
 
 	markdown +=

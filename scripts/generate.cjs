@@ -14,6 +14,7 @@ const ignored = [
 	'404.md',
 	'index.md',
 	'scripts',
+	'search.js',
 	'changelog',
 	'package.json',
 	'package-lock.json',

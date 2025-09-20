@@ -11,7 +11,7 @@
 	</head>
 	<body>
 		<div style="margin-bottom: 10px; border-bottom: 1px solid black">
-			<h1>&nbsp;Search</h1>
+			<h1>Search</h1>
 			<input
 				type="text"
 				id="search"
@@ -21,44 +21,7 @@
 			<ul id="results">
 				<li>Start searching to get results!</li>
 			</ul>
-			<script>
-				fetch('/search-index.json')
-					.then((res) => res.json())
-					.then((/** @type {string[]} */ data) => {
-						const input = document.getElementById('search');
-						const results = document.getElementById('results');
-
-						input.addEventListener('input', () => {
-							const query = input.value.toLowerCase();
-							results.innerHTML = '';
-
-							if (query == '') {
-								const li = document.createElement('li');
-								li.innerHTML =
-									'Start searching to get results!';
-								results.appendChild(li);
-								return;
-							}
-
-							const filtered = data.filter((item) =>
-								item.toLowerCase().includes(query)
-							);
-
-							if (filtered.length > 0)
-								filtered.forEach((item) => {
-									const li = document.createElement('li');
-									li.innerHTML = `<a href="/${item}">${item}</a>`;
-									results.appendChild(li);
-								});
-							else {
-								const li = document.createElement('li');
-								li.innerHTML =
-									'No results! Try searching for something else.';
-								results.appendChild(li);
-							}
-						});
-					});
-			</script>
+			<script src="/search.js"></script>
 		</div>
 		{{ content }}
 	</body>

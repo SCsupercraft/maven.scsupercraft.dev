@@ -1,4 +1,4 @@
-# [dev](/dev) » [scsupercraft](/dev/scsupercraft) » [mc](/dev/scsupercraft/mc) » [libraries](/dev/scsupercraft/mc/libraries) » [corelib-common-1.21.8](/dev/scsupercraft/mc/libraries/corelib-common-1.21.8)
+# [dev](/artifacts/dev) » [scsupercraft](/artifacts/dev/scsupercraft) » [mc](/artifacts/dev/scsupercraft/mc) » [libraries](/artifacts/dev/scsupercraft/mc/libraries) » corelib-common-1.21.8
 
 
-📁 [1.0.0](/dev/scsupercraft/mc/libraries/corelib-common-1.21.8/1.0.0)
+📁 [1.0.0](/artifacts/dev/scsupercraft/mc/libraries/corelib-common-1.21.8/1.0.0)

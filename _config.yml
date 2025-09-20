@@ -5,3 +5,6 @@ url: 'https://maven.scsupercraft.dev'
 theme: minima
 exclude:
     - scripts
+
+minima:
+    include_header: false

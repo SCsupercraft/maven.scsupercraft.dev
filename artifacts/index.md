@@ -1,4 +1,4 @@
 # Root
 
 
-📁 [dev](/dev)
+📁 [dev](/artifacts/dev)

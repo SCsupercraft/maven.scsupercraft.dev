@@ -1,4 +1,4 @@
-# [dev](/dev) » [scsupercraft](/dev/scsupercraft) » [mc](/dev/scsupercraft/mc)
+# [dev](/artifacts/dev) » [scsupercraft](/artifacts/dev/scsupercraft) » mc
 
 
-📁 [libraries](/dev/scsupercraft/mc/libraries)
+📁 [libraries](/artifacts/dev/scsupercraft/mc/libraries)

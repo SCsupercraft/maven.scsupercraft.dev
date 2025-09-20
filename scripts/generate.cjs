@@ -44,8 +44,9 @@ async function forFolder(/** @type {string} */ filePath) {
 	let curr = '';
 	const breadcrumb =
 		displayPath.length == 0
-			? 'Root'
-			: displayPath
+			? 'root'
+			: '[root](/artifacts) » ' +
+			  displayPath
 					.replaceAll('/', '»')
 					.replaceAll('\\', '»')
 					.split('»')

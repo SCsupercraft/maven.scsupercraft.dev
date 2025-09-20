@@ -199,12 +199,22 @@ async function forFolder(filePath) {
 		);
 		markdown += `\n- 📖 <a href="/${javadocRel}/index.html" target="_blank" rel="noopener noreferrer">View Javadoc</a>`;
 	}
-	if (files.includes('changelog')) {
-		const changelogUrl = await fs.readFile(
-			path.resolve(filePath, 'changelog'),
-			'utf-8'
+	if (files.includes('links.json')) {
+		const links = JSON.parse(
+			await fs.readFile(path.resolve(filePath, 'links.json'), 'utf-8')
 		);
-		markdown += `\n- 🧾 <a href="${changelogUrl.trim()}" target="_blank" rel="noopener noreferrer">View Changelog</a>`;
+
+		if (links.changelog)
+			markdown += `\n- 🧾 <a href="${links.changelog.trim()}" target="_blank" rel="noopener noreferrer">View Changelog</a>`;
+
+		if (links.homepage)
+			markdown += `\n- 🏠 <a href="${links.homepage.trim()}" target="_blank" rel="noopener noreferrer">View Homepage</a>`;
+
+		if (links.source)
+			markdown += `\n- 🛠️ <a href="${links.source.trim()}" target="_blank" rel="noopener noreferrer">View Source</a>`;
+
+		if (links.downloads)
+			markdown += `\n- 📦 <a href="${links.downloads.trim()}" target="_blank" rel="noopener noreferrer">View Downloads</a>`;
 	}
 
 	markdown +=

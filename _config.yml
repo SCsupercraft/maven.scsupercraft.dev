@@ -12,5 +12,5 @@ exclude:
     - node_modules
     - scripts
     - README.md
-    - changelog
-    - '**/changelog'
+    - links.json
+    - '**/links.json'

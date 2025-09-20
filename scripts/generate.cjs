@@ -108,9 +108,8 @@ async function forFolder(filePath) {
 
 	await fs.writeFile(path.resolve(filePath, 'index.md'), markdown, 'utf-8');
 	console.log(
-		'Created index for ' + displayPath.length == 0
-			? 'root'
-			: 'root/' + displayPath
+		'Created index for ' +
+			(displayPath.length == 0 ? 'root' : 'root/' + displayPath)
 	);
 }
 

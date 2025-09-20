@@ -28,7 +28,11 @@ async function getPathType(path) {
 	}
 }
 
-async function forFolder(/** @type {string} */ filePath) {
+/**
+ * Create an index.md file for the specified directory.
+ * @param {string} filePath - The path of the directory.
+ */
+async function forFolder(filePath) {
 	const displayPath = path.relative(artifactFolder, filePath);
 	const files = await fs.readdir(filePath);
 	const dirs = [];
@@ -72,16 +76,14 @@ async function forFolder(/** @type {string} */ filePath) {
 	let markdown = `# ${breadcrumb}\n`;
 
 	dirs.forEach((dir) => {
-		markdown += `\n\n📁 [${dir}](/${path
+		markdown += `\n- 📁 [${dir}](/${path
 			.relative(artifactFolder, path.resolve(filePath, dir))
 			.replaceAll('\\', '/')})`;
 		forFolder(path.resolve(filePath, dir));
 	});
 
-	if (dirs.length > 0 && artifacts.length > 0) markdown += '\n';
-
 	artifacts.forEach((artifact) => {
-		markdown += `\n\n📄 [${artifact}](/${path
+		markdown += `\n- 📄 [${artifact}](/${path
 			.relative(artifactFolder, path.resolve(filePath, artifact))
 			.replaceAll('\\', '/')})`;
 	});

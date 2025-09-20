@@ -1,4 +1,3 @@
 # [root](/) » [dev](/dev) » scsupercraft
 
-
-📁 [mc](/dev/scsupercraft/mc)
+- 📁 [mc](/dev/scsupercraft/mc)

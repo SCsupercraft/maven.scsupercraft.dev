@@ -78,12 +78,17 @@ async function forFolder(filePath) {
 
 	let markdown = `# ${breadcrumb}\n`;
 
-	dirs.forEach((dir) => {
+	for (let index in dirs) {
+		const dir = dirs[index];
+		const stats = await fs.stat(path.resolve(filePath, dir));
+		const modified = new Date(stats.mtime).toISOString().split('T')[0];
+
 		markdown += `\n- 📁 [${dir}](/${path
 			.relative(artifactFolder, path.resolve(filePath, dir))
-			.replaceAll('\\', '/')})`;
-		forFolder(path.resolve(filePath, dir));
-	});
+			.replaceAll('\\', '/')}) - modified ${modified}`;
+
+		await forFolder(path.resolve(filePath, dir));
+	}
 
 	for (let index in artifacts) {
 		const artifact = artifacts[index];

@@ -11,6 +11,7 @@ const ignored = [
 	'_layouts',
 	'CNAME',
 	'README.md',
+	'404.md',
 	'index.md',
 	'scripts',
 	'package.json',

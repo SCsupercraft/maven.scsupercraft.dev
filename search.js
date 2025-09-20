@@ -36,7 +36,7 @@ fetch('/search-index.json')
 						.map((item) => escapeHTML(item))
 						.forEach((item) => {
 							const li = document.createElement('li');
-							const highlighted = item.replace(
+							const highlighted = item.replaceAll(
 								query,
 								`<strong>${query}</strong>`
 							);

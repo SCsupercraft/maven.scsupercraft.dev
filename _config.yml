@@ -4,8 +4,9 @@ baseurl: ''
 url: 'https://maven.scsupercraft.dev'
 theme: null
 exclude:
+    - .git
+    - .github
+    - package.json
+    - package-lock.json
     - scripts
     - README.md
-
-minima:
-    nav_pages:

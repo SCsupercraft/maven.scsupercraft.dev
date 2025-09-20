@@ -6,6 +6,7 @@ const ignored = [
 	'.git',
 	'.github',
 	'_config.yml',
+	'_layouts',
 	'CNAME',
 	'README.md',
 	'index.md',
@@ -83,7 +84,7 @@ async function forFolder(filePath) {
 						);
 					}, '');
 
-	let markdown = `---\ntitle: SCsupercraft's Maven\n---\n\n# ${breadcrumb}\n`;
+	let markdown = `# ${breadcrumb}\n`;
 
 	for (let dir of dirs) {
 		const fullPath = path.resolve(filePath, dir);

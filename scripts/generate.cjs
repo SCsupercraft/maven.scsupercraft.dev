@@ -38,6 +38,8 @@ async function getPathType(path) {
 async function forFolder(filePath) {
 	const displayPath = path.relative(artifactFolder, filePath);
 	const files = (await fs.readdir(filePath)).sort();
+	if (files.length == 0) return;
+
 	const dirs = [];
 	const artifacts = [];
 
@@ -101,8 +103,11 @@ async function forFolder(filePath) {
 			.replaceAll('\\', '/')}) - ${sizeKB} KB, modified ${modified}`;
 	}
 
+	markdown +=
+		'\n\n## Links:\n- [Github](https://github.com/SCsupercraft/scsupercraft-maven)';
+
 	await fs.writeFile(path.resolve(filePath, 'index.md'), markdown, 'utf-8');
-	console.log('Created index for ' + filePath);
+	console.log('Created index for ' + displayPath);
 }
 
 forFolder(artifactFolder);

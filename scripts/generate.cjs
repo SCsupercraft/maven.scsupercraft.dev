@@ -201,7 +201,7 @@ async function forFolder(filePath) {
 		)}" target="_blank" rel="noopener noreferrer">View Changelog</a>`;
 
 	markdown +=
-		'\n\n## Links:\n- [Github](https://github.com/SCsupercraft/scsupercraft-maven)\n- [Main Site](https://www.scsupercraft.dev)';
+		'\n\n## Links:\n- [Github](https://github.com/SCsupercraft/maven.scsupercraft.dev)\n- [Main Site](https://www.scsupercraft.dev)';
 
 	await fs.writeFile(path.resolve(filePath, 'index.md'), markdown, 'utf-8');
 	console.log(

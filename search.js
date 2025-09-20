@@ -32,17 +32,17 @@ fetch('/search-index.json')
 				);
 
 				if (filtered.length > 0)
-					filtered.forEach((item) => {
-						const li = document.createElement('li');
-						const highlighted = item.replace(
-							query,
-							`<strong>${query}</strong>`
-						);
-						li.innerHTML = `<a href="/${item}">${escapeHTML(
-							highlighted
-						)}</a>`;
-						results.appendChild(li);
-					});
+					filtered
+						.map((item) => escapeHTML(item))
+						.forEach((item) => {
+							const li = document.createElement('li');
+							const highlighted = item.replace(
+								query,
+								`<strong>${query}</strong>`
+							);
+							li.innerHTML = `<a href="/${item}">${highlighted}</a>`;
+							results.appendChild(li);
+						});
 				else {
 					const li = document.createElement('li');
 					li.innerHTML =

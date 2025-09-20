@@ -82,24 +82,26 @@ async function forFolder(filePath) {
 
 	for (let index in dirs) {
 		const dir = dirs[index];
-		const stats = await fs.stat(path.resolve(filePath, dir));
+		const fullPath = path.resolve(filePath, dir);
+		const stats = await fs.stat(fullPath);
 		const modified = new Date(stats.mtime).toISOString().split('T')[0];
 
 		markdown += `\n- 📁 [${dir}](/${path
-			.relative(artifactFolder, path.resolve(filePath, dir))
+			.relative(artifactFolder, fullPath)
 			.replaceAll('\\', '/')}) - modified ${modified}`;
 
-		await forFolder(path.resolve(filePath, dir));
+		await forFolder(fullPath);
 	}
 
 	for (let index in artifacts) {
 		const artifact = artifacts[index];
-		const stats = await fs.stat(path.resolve(filePath, artifact));
+		const fullPath = path.resolve(filePath, artifact);
+		const stats = await fs.stat(fullPath);
 		const sizeKB = (stats.size / 1024).toFixed(1);
 		const modified = new Date(stats.mtime).toISOString().split('T')[0];
 
 		markdown += `\n- 📄 [${artifact}](/${path
-			.relative(artifactFolder, path.resolve(filePath, artifact))
+			.relative(artifactFolder, fullPath)
 			.replaceAll('\\', '/')}) - ${sizeKB} KB, modified ${modified}`;
 	}
 

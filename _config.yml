@@ -7,4 +7,4 @@ exclude:
     - scripts
 
 minima:
-    include_header: false
+    nav_pages:

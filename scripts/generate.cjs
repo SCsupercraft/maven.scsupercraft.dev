@@ -63,7 +63,7 @@ async function forFolder(/** @type {string} */ filePath) {
 	let markdown = `# ${breadcrumb}\n\n`;
 
 	dirs.forEach((dir) => {
-		markdown += `\n📁 [${dir}](/artifacts/${path
+		markdown += `\n- 📁 [${dir}](/artifacts/${path
 			.relative(artifactFolder, path.resolve(filePath, dir))
 			.replaceAll('\\', '/')})`;
 		forFolder(path.resolve(filePath, dir));
@@ -72,7 +72,7 @@ async function forFolder(/** @type {string} */ filePath) {
 	if (dirs.length > 0 && artifacts.length > 0) markdown += '\n\n';
 
 	artifacts.forEach((artifact) => {
-		markdown += `\n📄 [${artifact}](/artifacts/${path
+		markdown += `\n- 📄 [${artifact}](/artifacts/${path
 			.relative(artifactFolder, path.resolve(filePath, artifact))
 			.replaceAll('\\', '/')})`;
 	});

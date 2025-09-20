@@ -1,0 +1,5 @@
+title: SCsupercraft's Maven
+description: Hosted Maven artifacts for SCsupercraft's projects.
+baseurl: ''
+url: 'https://maven.scsupercraft.dev'
+theme: minima

@@ -15,7 +15,7 @@ const ignored = [
 	'index.md',
 	'scripts',
 	'search.js',
-	'changelog',
+	'links.json',
 	'package.json',
 	'package-lock.json',
 	'node_modules',

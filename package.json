@@ -14,5 +14,8 @@
 	"bugs": {
 		"url": "https://github.com/SCsupercraft/scsupercraft-maven/issues"
 	},
-	"homepage": "https://maven.scsupercraft.dev"
+	"homepage": "https://maven.scsupercraft.dev",
+	"dependencies": {
+		"extract-zip": "^2.0.1"
+	}
 }

@@ -1,5 +1,6 @@
 const path = require('node:path');
 const fs = require('node:fs/promises');
+const unzip = require('extract-zip');
 
 const artifactFolder = path.resolve('./');
 const ignored = [
@@ -13,6 +14,7 @@ const ignored = [
 	'scripts',
 	'package.json',
 	'package-lock.json',
+	'node_modules',
 ];
 
 /**
@@ -33,6 +35,26 @@ async function getPathType(path) {
 }
 
 /**
+ * Extracts Javadoc JARs into a sibling 'javadoc/' folder.
+ * @param {string} jarPath - Full path to the Javadoc JAR file.
+ * @returns {Promise<boolean>} - Was the file a Javadoc JAR?
+ */
+async function extractJavadocJar(jarPath) {
+	if (!jarPath.endsWith('-javadoc.jar')) return false;
+
+	const targetDir = path.join(path.dirname(jarPath), 'javadoc');
+	try {
+		await fs.mkdir(targetDir, { recursive: true });
+		await unzip(jarPath, { dir: targetDir });
+		console.log(`Extracted Javadoc to ${targetDir}`);
+		return true;
+	} catch (err) {
+		console.error(`Failed to extract Javadoc from ${jarPath}`, err);
+		return false;
+	}
+}
+
+/**
  * Create an index.md file for the specified directory.
  * @param {string} filePath - The path of the directory.
  */
@@ -49,6 +71,11 @@ async function forFolder(filePath) {
 
 	const dirs = [];
 	const artifacts = [];
+
+	const javadocRel = path.posix.relative(
+		artifactFolder,
+		path.resolve(filePath, 'javadoc')
+	);
 
 	for (let i in files) {
 		const file = files[i];
@@ -99,16 +126,21 @@ async function forFolder(filePath) {
 		await forFolder(fullPath);
 	}
 
+	let hasJavadoc = false;
 	for (let artifact of artifacts) {
 		const fullPath = path.resolve(filePath, artifact);
 		const stats = await fs.stat(fullPath);
 		const sizeKB = (stats.size / 1024).toFixed(1);
 		const modified = new Date(stats.mtime).toISOString().split('T')[0];
+		const isJavadoc = !hasJavadoc && (await extractJavadocJar(fullPath));
+		if (isJavadoc) hasJavadoc = true;
 
 		markdown += `\n- 📄 [${artifact}](/${path.posix.relative(
 			artifactFolder,
 			fullPath
-		)}) - ${sizeKB} KB, modified ${modified}`;
+		)}) - ${sizeKB} KB, modified ${modified}${
+			isJavadoc ? `, [view javadoc](/${javadocRel}/index.html)` : ''
+		}`;
 	}
 
 	markdown +=

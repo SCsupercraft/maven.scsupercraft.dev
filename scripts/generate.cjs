@@ -166,13 +166,11 @@ async function forFolder(filePath) {
 
 	for (let dir of dirs) {
 		const fullPath = path.resolve(filePath, dir);
-		const stats = await fs.stat(fullPath);
-		const modified = new Date(stats.mtime).toISOString().split('T')[0];
 
 		markdown += `\n- 📁 [${dir}](/${path.posix.relative(
 			artifactFolder,
 			fullPath
-		)}) - modified ${modified}`;
+		)})`;
 
 		await forFolder(fullPath);
 	}
@@ -182,14 +180,13 @@ async function forFolder(filePath) {
 		const fullPath = path.resolve(filePath, artifact);
 		const stats = await fs.stat(fullPath);
 		const sizeKB = (stats.size / 1024).toFixed(1);
-		const modified = new Date(stats.mtime).toISOString().split('T')[0];
 		const isJavadoc = !hasJavadoc && (await extractJavadocJar(fullPath));
 		if (isJavadoc) hasJavadoc = true;
 
 		markdown += `\n- 📄 [${artifact}](/${path.posix.relative(
 			artifactFolder,
 			fullPath
-		)}) - ${sizeKB} KB, modified ${modified}`;
+		)}) - ${sizeKB} KB`;
 	}
 
 	if (hasJavadoc) {

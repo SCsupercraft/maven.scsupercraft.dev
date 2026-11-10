@@ -59,6 +59,12 @@ jobs:
         run: |
           ./gradlew ${{ inputs.gradle_tasks }}
 
+      - name: Read Project Metadata
+        shell: bash
+        run: |
+          echo "NAME=$(./gradlew properties -q | awk '/^name:/ {print $2}')" >> $GITHUB_ENV
+          echo "VERSION=$(./gradlew properties -q | awk '/^version:/ {print $2}')" >> $GITHUB_ENV
+
       - name: Commit & Push Changes
         shell: bash
         working-directory: maven-repo
@@ -72,9 +78,6 @@ jobs:
             echo "No changes"
             exit 0
           fi
-
-          NAME=$(../gradlew properties -q | grep "^name:" | awk '{print $2}')
-          VERSION=$(../gradlew properties -q | grep "^version:" | awk '{print $2}')
 
           git commit -m "Publish $NAME Version $VERSION"
           git push origin main

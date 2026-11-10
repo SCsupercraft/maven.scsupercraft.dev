@@ -1,0 +1,132 @@
+{
+  "formatVersion": "1.1",
+  "component": {
+    "group": "dev.engine",
+    "module": "bus",
+    "version": "9.0.0",
+    "attributes": {
+      "org.gradle.status": "release"
+    }
+  },
+  "createdBy": {
+    "gradle": {
+      "version": "8.14.2"
+    }
+  },
+  "variants": [
+    {
+      "name": "apiElements",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.jvm.version": 17,
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-api"
+      },
+      "dependencies": [
+        {
+          "group": "net.jodah",
+          "module": "typetools",
+          "version": {
+            "requires": "0.6.3"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "bus-9.0.0.jar",
+          "url": "bus-9.0.0.jar",
+          "size": 31873,
+          "sha512": "3526e361679be4a2681d723d4e647c7985333b47aeef6bce5ae67a545315f052452660ce26cb4aa4d691ba784fda5e2d527fbc2824ea11da623d6e1f98a68cdc",
+          "sha256": "05bbea82d9d9eddbbd0e1f861ecf52dd00ce20938001429b71451b14c32a317d",
+          "sha1": "51e5413060b163fcd95cb6abf5d20a3ed34268b0",
+          "md5": "f9413e80e8f7b2922069a5969271823d"
+        }
+      ]
+    },
+    {
+      "name": "runtimeElements",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.jvm.version": 17,
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-runtime"
+      },
+      "dependencies": [
+        {
+          "group": "org.ow2.asm",
+          "module": "asm",
+          "version": {
+            "requires": "9.2"
+          }
+        },
+        {
+          "group": "org.apache.logging.log4j",
+          "module": "log4j-api",
+          "version": {
+            "requires": "2.17.1"
+          }
+        },
+        {
+          "group": "net.jodah",
+          "module": "typetools",
+          "version": {
+            "requires": "0.6.3"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "bus-9.0.0.jar",
+          "url": "bus-9.0.0.jar",
+          "size": 31873,
+          "sha512": "3526e361679be4a2681d723d4e647c7985333b47aeef6bce5ae67a545315f052452660ce26cb4aa4d691ba784fda5e2d527fbc2824ea11da623d6e1f98a68cdc",
+          "sha256": "05bbea82d9d9eddbbd0e1f861ecf52dd00ce20938001429b71451b14c32a317d",
+          "sha1": "51e5413060b163fcd95cb6abf5d20a3ed34268b0",
+          "md5": "f9413e80e8f7b2922069a5969271823d"
+        }
+      ]
+    },
+    {
+      "name": "sourcesElements",
+      "attributes": {
+        "org.gradle.category": "documentation",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.docstype": "sources",
+        "org.gradle.usage": "java-runtime"
+      },
+      "files": [
+        {
+          "name": "bus-9.0.0-sources.jar",
+          "url": "bus-9.0.0-sources.jar",
+          "size": 25187,
+          "sha512": "44dcc68693fdfb95e2941a14e81e5f834bbdf6d638d2a9dde4d23ac3f9e8bc27d4b055894826fe198ae07cbb2de49c13d8fdfe83641a0f754918b834be4579fd",
+          "sha256": "32928bfda5ca1c92e779a15fe0974091a1ad107f90c9ca2c876fcce69f713cde",
+          "sha1": "508b9e8abb329bff2bddb4859d91b80a77ca5443",
+          "md5": "047ee77c017b622cc81f4d88b04297c4"
+        }
+      ]
+    },
+    {
+      "name": "javadocElements",
+      "attributes": {
+        "org.gradle.category": "documentation",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.docstype": "javadoc",
+        "org.gradle.usage": "java-runtime"
+      },
+      "files": [
+        {
+          "name": "bus-9.0.0-javadoc.jar",
+          "url": "bus-9.0.0-javadoc.jar",
+          "size": 154383,
+          "sha512": "8929df5314dcbb9548f88afb6715884ebb52b1283815fd5ddb0c884161ddaf8ba2f51be4e2db27400fd7ca09141bbef3863457ec7b4f27ae389d5a89b64d1add",
+          "sha256": "abb3f4e2572bfb422aabb5f740a73b10f6f8f181589f39f170684c9726924d09",
+          "sha1": "2450b28c572735bdb846bfa498bea3d4b87cfb8f",
+          "md5": "880cf56a055cf79f3012afe5e42f87c6"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,72 @@
+ - `9.0.0` Start 9.0
+ - `8.0.7` Update Javadoc & New Features
+   
+   Added start-up validators and the OneTimeEventListener class.
+ - `8.0.6` Prepare for EngineMC
+ - `8.0.5` Clean-up and documentation adjustments (#35)
+ - `8.0.4` Allow registering static `Method`s through `register` (#36)
+ - `8.0.3` Update Gradle and GU, enable PR publishing
+ - `8.0.2` Respect `@SubscribeEvent.receiveCanceled` (#33)
+   
+   Re-adds the dropped bypass, that was accidentally dropped in https://github.com/neoforged/Bus/pull/20
+   
+   Fixes https://github.com/neoforged/Bus/issues/32
+ - `8.0.1` Remove `Result` and `GenericEvent` (#30)
+ - `8.0.0` Start 8.0
+ - `7.2.0` Fix publishing
+ - `7.1.4` Change `EventListener` to a `sealed` class (#29)
+ - `7.1.3` Add licenser (#27)
+ - `7.1.2` Update "Build PRs" workflow (#28)
+   
+   * Update "Build PRs" workflow
+   
+   * Don't run jmh on build-prs.yml
+ - `7.1.1` Get rid of the jopt dep and pin typetools
+ - `7.1.0` Move to GH Actions and bump to J17
+ - `7.0.18` TeamCity change in 'NeoForged / Bus' project: bulk pause/activate with comment: GHA Move - `7.0.17` Go back to silently returning the event if the bus is not started (#26)
+ - `7.0.16` Add post overload for a specific `EventPriority` (#25)
+   
+   * Add post overload for a specific EventPriority
+   * Cache per-phase listener array in the ListenerList
+ - `7.0.15` Make abstract events non-listenable (#21)
+ - `7.0.14` Replace ModLauncher hooks by `defineHiddenClass` and update `@SubscribeEvent` semantics (#24)
+   
+   Replaces the ModLauncher hooks by `defineHiddenClass`. Many thanks to @SquidDev for the idea!
+   
+   Removes `IEventBusInvokeDispatcher` and changes `IEventListener` to an abstract class (`EventListener`) for performance reasons.
+   
+   ### Updated `@SubscribeEvent` semantics
+   The new behavior is as follows:
+   - Will register all methods (regardless of visibility) in the target object. (No inheritance of `@SubscribeEvent` methods anymore, previously method visibility was handled weirdly).
+   - Will error if any superclass or superinterface has a declared method with `@SubscribeEvent`. (Prevents mistake where user would assume that inheritance works).
+   - Will error if any `@SubscribeEvent` method has mismatching static-ness. (Prevents mistake where `static` is forgotten or unnecessary).
+   - Will error if no method at all could be found. (Prevents forgetting the `@SubscribeEvent` annotation).
+   
+   ---------
+   
+   Co-authored-by: Jonathan Coates <git@squiddev.cc>
+ - `7.0.13` Replace `@Cancelable` by `ICancellableEvent` interface & related changes (#20)
+   
+   * Replace the annotation by an interface that brings the `isCanceled` and `setCanceled` methods in scope for cancellable events only.
+   * Change `IEventBus#post` to return the event itself.
+   * Remove IEventBus#shutdown and throw an exception when posting an event too early.
+   * Replace `GenericEvent` by `Event & IGenericEvent` bound in a few places - this is necessary to ensure that the cancellation check is properly removed for non-cancellable events.
+   * Standardize spelling to most common US english variant. I chose the most common US spelling for: `canceled` (single L), `cancellable` (double L), and `cancellation` (double L).
+     * Importantly, this does not change `isCanceled()` and `setCanceled()`.
+ - `7.0.12` Rework ModLauncher classloading hacks to preserve static fields between test runs (#23)
+   
+   Same hack as before, but using the same `TransformingClassLoader` for every test run. This preserves static fields between test runs, and thus the thread pool from one of the tests is reused... this avoids spamming our TC server with new threads until it decides to fail the run due to excessive resource allocation.
+ - `7.0.11` Run tests when building on TeamCity (#22)
+ - `7.0.10` Terminally deprecate generic events and @HasResult (#19)
+ - `7.0.9` Unwrap isCanceled check for non-cancelable events (#18)
+ - `7.0.8` Store listener lists inside the EventBus (#17)
+ - `7.0.7` Remove now-useless class validation in tests
+ - `7.0.6` Remove subclass transformer
+ - `7.0.5` Change package to `net.neoforged.bus` (#15)
+ - `7.0.4` Improve no-ASM performance (#14)
+ - `7.0.3` Make type checking more flexible (#11)
+   
+   This will allow the Forge bus to reject `IModBusEvent` listeners.
+ - `7.0.2` Remove phase tracking for Events (`getPhase` and `setPhase`) (#13)
+ - `7.0.1` Add more overloads to IEventBus for optional addListener parameters (#8)
+ - `7.0.0` 7.0 and Neoify

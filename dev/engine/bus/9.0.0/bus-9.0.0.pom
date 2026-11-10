@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <!-- This module was also published with a richer model, Gradle metadata,  -->
+  <!-- which should be used instead. Do not delete the following line which  -->
+  <!-- is to indicate to Gradle or any Gradle module metadata file consumer  -->
+  <!-- that they should prefer consuming it instead. -->
+  <!-- do_not_remove: published-with-gradle-metadata -->
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>dev.engine</groupId>
+  <artifactId>bus</artifactId>
+  <version>9.0.0</version>
+  <name>Bus</name>
+  <description>High performance Event Bus library</description>
+  <url>https://github.com/NeoForged/Bus</url>
+  <licenses>
+    <license>
+      <name>LGPL-2.1-only</name>
+      <url>https://spdx.org/licenses/LGPL-2.1-only</url>
+    </license>
+  </licenses>
+  <developers>
+    <developer>
+      <id>engine</id>
+      <name>EngineMC</name>
+      <url>https://github.com/EngineMC</url>
+    </developer>
+  </developers>
+  <scm>
+    <connection>scm:git:git://github.com/NeoForged/Bus.git</connection>
+    <developerConnection>scm:git:git@github.com:NeoForged/Bus.git</developerConnection>
+    <url>https://github.com/NeoForged/Bus</url>
+  </scm>
+  <issueManagement>
+    <system>github</system>
+    <url>https://github.com/NeoForged/Bus/issues</url>
+  </issueManagement>
+  <dependencies>
+    <dependency>
+      <groupId>net.jodah</groupId>
+      <artifactId>typetools</artifactId>
+      <version>0.6.3</version>
+      <scope>compile</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.ow2.asm</groupId>
+      <artifactId>asm</artifactId>
+      <version>9.2</version>
+      <scope>runtime</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.logging.log4j</groupId>
+      <artifactId>log4j-api</artifactId>
+      <version>2.17.1</version>
+      <scope>runtime</scope>
+    </dependency>
+  </dependencies>
+</project>
